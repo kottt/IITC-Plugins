@@ -7,40 +7,42 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.OptimalFields", "IITC.
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_24254"
-		Debug.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.OptimalFields\"
+		Debug.AspNetCompiler.PhysicalPath = "IITC.OptimalFields\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24254\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_24254"
-		Release.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.OptimalFields\"
+		Release.AspNetCompiler.PhysicalPath = "IITC.OptimalFields\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24254\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "24254"
+		SlnRelativePath = "IITC.OptimalFields\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.UltraUp", "IITC.UltraUp\", "{B1D46850-69B9-44EA-B06D-556331B417A9}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_24260"
-		Debug.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.UltraUp\"
+		Debug.AspNetCompiler.PhysicalPath = "IITC.UltraUp\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24260\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_24260"
-		Release.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.UltraUp\"
+		Release.AspNetCompiler.PhysicalPath = "IITC.UltraUp\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24260\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "24260"
+		SlnRelativePath = "IITC.UltraUp\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_lib", "_lib\", "{75E9B4AC-7D66-42CD-A8FB-8D6699CAB3A2}"
@@ -61,6 +63,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_lib", "_lib\", "{75E9B4AC-
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "24302"
+		SlnRelativePath = "_lib\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_temp", "_temp\", "{EF1D64FD-909F-4FAA-A01B-A4B5CA09ABF6}"
@@ -81,6 +84,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_temp", "_temp\", "{EF1D64F
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "24304"
+		SlnRelativePath = "_temp\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.Prototypes", "Map.Prototypes\", "{06E4C4AB-7C06-4F2B-B6C7-CC46F7274832}"
@@ -101,6 +105,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.Prototypes", "Map.Proto
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "4285"
+		SlnRelativePath = "Map.Prototypes\"
 	EndProjectSection
 EndProject
 Global
