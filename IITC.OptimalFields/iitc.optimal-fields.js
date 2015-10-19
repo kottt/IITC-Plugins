@@ -19,12 +19,11 @@
 
 	function wrapper(pluginInfo) {
 
-
 		var getShortGmapsLib = function () {
 			function pe(a) { return a / (Math.PI / 180); }
 			function oe(a) { return Math.PI / 180 * a; }
-			function tf(a) { return oe(a.k); }
-			function uf(a) { return oe(a.D); }
+			function tf(a) { return oe(a.lat()); }
+			function uf(a) { return oe(a.lng()); }
 			function me(a, b, c) {
 				c = c - b;
 				return ((a - b) % c + c) % c + b;
@@ -89,11 +88,11 @@
 					return !1;
 				},
 				computeHeading: function (a, b) {
-					var c = oe(a.A),
-						d = oe(b.A),
-						e = oe(b.F) - oe(a.F);
+					var c = tf(a),
+						d = tf(b),
+						e = uf(b) - uf(a);
 					return me(pe(Math.atan2(Math.sin(e) * Math.cos(d), Math.cos(c) * Math.sin(d) - Math.sin(c) * Math.cos(d) * Math.cos(e))), -180, 180);
-				},
+				}
 			};
 
 			return lib;

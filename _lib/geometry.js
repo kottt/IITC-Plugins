@@ -1,8 +1,11 @@
 ﻿function pe(a) { return a / (Math.PI / 180); }
 function oe(a) { return Math.PI / 180 * a; }
-function tf(a) { return oe(a.k); }
-function uf(a) { return oe(a.D); }
-function me(a, b, c) { c = c - b; return ((a - b) % c + c) % c + b; }
+function tf(a) { return oe(a.lat()); }
+function uf(a) { return oe(a.lng()); }
+function me(a, b, c) {
+	c = c - b;
+	return ((a - b) % c + c) % c + b;
+}
 
 function sF(a, b) {
 	return Math.abs(me(b - a, -180, 180));
@@ -67,5 +70,5 @@ var lib = {
 			d = tf(b),
 			e = uf(b) - uf(a);
 		return me(pe(Math.atan2(Math.sin(e) * Math.cos(d), Math.cos(c) * Math.sin(d) - Math.sin(c) * Math.cos(d) * Math.cos(e))), -180, 180);
-	},
+	}
 };
