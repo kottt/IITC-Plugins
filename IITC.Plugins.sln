@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.OptimalFields", "IITC.OptimalFields\", "{BB482997-0D2D-4AB3-8B5D-598C613A0E5D}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_24254"
+		Debug.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.OptimalFields\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24254\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_24254"
+		Release.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.OptimalFields\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24254\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "24254"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.UltraUp", "IITC.UltraUp\", "{B1D46850-69B9-44EA-B06D-556331B417A9}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_24260"
+		Debug.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.UltraUp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24260\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_24260"
+		Release.AspNetCompiler.PhysicalPath = "D:\GitHub\IITC Plugins\IITC.UltraUp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24260\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "24260"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_lib", "_lib\", "{75E9B4AC-7D66-42CD-A8FB-8D6699CAB3A2}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_24302"
+		Debug.AspNetCompiler.PhysicalPath = "_lib\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24302\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_24302"
+		Release.AspNetCompiler.PhysicalPath = "_lib\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24302\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "24302"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "_temp", "_temp\", "{EF1D64FD-909F-4FAA-A01B-A4B5CA09ABF6}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_24304"
+		Debug.AspNetCompiler.PhysicalPath = "_temp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24304\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_24304"
+		Release.AspNetCompiler.PhysicalPath = "_temp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24304\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "24304"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.Prototypes", "Map.Prototypes\", "{06E4C4AB-7C06-4F2B-B6C7-CC46F7274832}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4285"
+		Debug.AspNetCompiler.PhysicalPath = "Map.Prototypes\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4285\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4285"
+		Release.AspNetCompiler.PhysicalPath = "Map.Prototypes\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4285\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4285"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB482997-0D2D-4AB3-8B5D-598C613A0E5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB482997-0D2D-4AB3-8B5D-598C613A0E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D46850-69B9-44EA-B06D-556331B417A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D46850-69B9-44EA-B06D-556331B417A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75E9B4AC-7D66-42CD-A8FB-8D6699CAB3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75E9B4AC-7D66-42CD-A8FB-8D6699CAB3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1D64FD-909F-4FAA-A01B-A4B5CA09ABF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1D64FD-909F-4FAA-A01B-A4B5CA09ABF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E4C4AB-7C06-4F2B-B6C7-CC46F7274832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E4C4AB-7C06-4F2B-B6C7-CC46F7274832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

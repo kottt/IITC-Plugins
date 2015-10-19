@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>UltraUp testing</title>
+	<meta charset="utf-8" />
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			height: 100%;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="map"></div>
+	<script src="data.js"></script>
+	<script>
+		var mapCenter = { lat: 58.5283716, lng: 31.2762483 };
+
+		function bronKerboschMaxByInclusion(m) {
+			var results = [];
+
+			function check(candidates, wrong) {
+				for (var i = 0; i < wrong.length; i++) {
+					var q = true;
+
+					for (var j = 0; j < candidates.length; j++) {
+						if (m[i][j]) {
+							q = false;
+							break;
+						}
+					}
+
+					if (q) return false;
+				}
+				return true;
+			}
+
+			function remove(arr, item) {
+				var index = arr.indexOf(item);
+				if (index > -1) {
+					arr.splice(index, 1);
+				}
+			}
+
+			function extend(compsub, candidates, wrong) {
+				while (candidates && check(candidates, wrong)) {
+					var v = candidates[0];
+					compsub.push(v);
+
+					var filter = function (i) { return (!m[i][v] && i !== v); };
+					var newCandidates = candidates.filter(filter);
+					var newWrong = wrong.filter(filter);
+
+					if (newCandidates.length === 0 && newWrong.length === 0) {
+						results.push(compsub.slice());
+					} else {
+						extend(compsub, newCandidates, newWrong);
+					}
+
+					remove(candidates, v);
+					remove(compsub, v);
+					wrong.push(v);
+				}
+			}
+
+			function range(max) {
+				var arr = [];
+				for (var i = 0; i < max; i++) {
+					arr.push(i);
+				}
+				return arr;
+			}
+
+			extend([], range(m.length), []);
+
+			return results;
+		}
+
+		function getAngleSign(ab, b, c) {
+			var bc = window.google.maps.geometry.spherical.computeHeading(b, c);
+			return (ab - bc) < 180 ? 1 : -1;
+		}
+
+		function isGoodPair(a, b, outcomePoints) {
+			var ab = window.google.maps.geometry.spherical.computeHeading(a, b);
+
+			var angleSign = null;
+			for (var i = 0; i < outcomePoints.length; i++) {
+				var currenctSign = getAngleSign(ab, b, outcomePoints[i]);
+				if (angleSign !== null && angleSign !== currenctSign) {
+					return false;
+				}
+				angleSign = currenctSign;
+			}
+			return true;
+		}
+
+		function getMaxSequense(outcome41Th, outcome, income) {
+			
+		}
+
+		function initMap() {
+			var gmaps = window.google.maps;
+
+			var map = new gmaps.Map(document.getElementById("map"), {
+				center: mapCenter,
+				zoom: 14
+			});
+
+			function toLatLng(point) {
+				return new gmaps.LatLng(point.latlng.lat, point.latlng.lng);
+			}
+
+			function getIcon(color) {
+				return {
+					path: gmaps.SymbolPath.CIRCLE,
+					fillColor: color,
+					fillOpacity: .4,
+					strokeColor: "white",
+					strokeWeight: .5,
+					scale: 10
+				}
+			}
+
+			function drawPoint(point) {
+				var marker = new gmaps.Marker({
+					position: point.latlng,
+					map: map,
+					icon: getIcon(point.color)
+				});
+
+				point.marker = marker;
+
+				marker.addListener("click", function () {
+					marker.setIcon(getIcon(point.enabled ? "white" : point.color));
+					point.enabled = !point.enabled;
+				});
+			}
+
+			function pointsToObjects(points, color) {
+				var result = [];
+				for (var i = 0; i < points.length; i++) {
+					result.push({
+						latlng: points[i],
+						enabled: true,
+						color: color,
+						index: i
+					});
+				}
+				return result;
+			}
+
+			var outcomePoints = pointsToObjects(window.outcomePoints, "blue");
+			var incomePoints = pointsToObjects(window.incomePoints, "yellow");
+
+
+			var outcome = outcomePoints.map(toLatLng);
+			var income = incomePoints.map(toLatLng);
+
+			var pairsGraph = [];
+
+			for (var i = 0; i < income.length; i++) {
+				var row = [];
+				for (var j = 0; j < income.length; j++) {
+					row.push(!isGoodPair(income[i], income[j], outcome));
+				}
+				pairsGraph.push(row);
+			}
+
+			window.chains = bronKerboschMaxByInclusion(pairsGraph);
+			console.log(window.chains);
+
+			var chain = window.chains[0];
+			for (var i = 0; i < chain.length; i++) {
+				var point = incomePoints[chain[i]];
+				point.color = "green";
+			}
+
+
+			outcomePoints.forEach(drawPoint);
+			incomePoints.forEach(drawPoint);
+
+		}
+
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&callback=initMap"></script>
+
+</body>
+</html>
