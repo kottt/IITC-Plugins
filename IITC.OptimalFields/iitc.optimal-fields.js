@@ -115,7 +115,7 @@ window.shortGmapsLib = (function () {
 		// ReSharper disable once InconsistentNaming
 		var __portalsCache = {};
 		// ReSharper disable once InconsistentNaming
-		var __lib = window.shortGmapsLib;
+		var __lib;
 
 		function drawMarker(point, id) {
 			var icon = new L.icon({
@@ -286,6 +286,7 @@ window.shortGmapsLib = (function () {
 
 		var setup = function() {
 			__gmaps = window.google.maps;
+			__lib = window.shortGmapsLib;
 
 			// this layer is added to the layer chooser, to be toggled on/off
 			window.plugin.OptimalFields.LayerHolderGroup = new L.LayerGroup();

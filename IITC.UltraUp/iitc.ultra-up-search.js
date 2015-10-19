@@ -6,7 +6,7 @@
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
 // @updateURL
 // @downloadURL
-// @description    search portal clusters for maximal linking with 2n-1 fields
+// @description    search portal clusters for maximal linking with 2n-3 fields
 // @include        https://www.ingress.com/intel*
 // @include        http://www.ingress.com/intel*
 // @match          https://www.ingress.com/intel*
