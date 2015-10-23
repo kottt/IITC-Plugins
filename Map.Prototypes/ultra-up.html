@@ -87,7 +87,7 @@
 			return (ab - bc) < 180 ? 1 : -1;
 		}
 
-		function isGoodPair(a, b, outcomePoints) {
+		function isGoodPair(a, b, outcomePoints, outcome41Th) {
 			var ab = window.google.maps.geometry.spherical.computeHeading(a, b);
 
 			var angleSign = null;
@@ -97,12 +97,25 @@
 					return false;
 				}
 				angleSign = currenctSign;
+
+				if (getAngleSign(ab, b, outcome41Th) == currenctSign) {
+					return false;
+				}
 			}
 			return true;
 		}
 
 		function getMaxSequense(outcome41Th, outcome, income) {
-			
+			var pairsGraph = [];
+			for (var i = 0; i < income.length; i++) {
+				var row = [];
+				for (var j = 0; j < income.length; j++) {
+					row.push(!isGoodPair(income[i], income[j], outcome, outcome41Th));
+				}
+				pairsGraph.push(row);
+			}
+
+			return bronKerboschMaxByInclusion(pairsGraph);
 		}
 
 		function initMap() {

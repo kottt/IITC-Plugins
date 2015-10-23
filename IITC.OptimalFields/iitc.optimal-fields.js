@@ -51,7 +51,15 @@
 			}
 			var lib = {
 				containsLocation: function (a, b) {
-					for (var c = me(a.lng(), -180, 180), d = !!b.get("geodesic"), e = b.get("latLngs"), f = b.get("map"), f = !d && f ? f.getProjection() : null, g = false, h = 0, n = e.getLength() ; h < n; ++h)
+					var c = me(a.lng(), -180, 180),
+					    d = !!b.get("geodesic"),
+					    e = b.get("latLngs"),
+					    f = b.get("map"),
+					    g = false,
+					    n = e.getLength();
+					f = !d && f ? f.getProjection() : null;
+
+					for (var h = 0; h < n; ++h)
 						for (var r = e.getAt(h), t = 0, x = r.getLength() ; t < x; ++t) {
 							var y = r.getAt(t),
 								z = r.getAt((t + 1) % x),
