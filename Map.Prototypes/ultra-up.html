@@ -118,6 +118,31 @@
 			return bronKerboschMaxByInclusion(pairsGraph);
 		}
 
+		function getEdges(outcomePoints, outcome41Th) {
+			// бежим по всем, ищем такие, у которых знак для всех остальных будет одинаковым
+		}
+
+		function getVariants(allPoints, outcomeIndexes, minIncomingCount) {
+			var outcome = outcomeIndexes.map(function (index) { return allPoints[index]; });
+			var availablePoints = [];
+			for (var i = 0; i < allPoints.length; i++) {
+				if (outcomeIndexes.indexOf(i) < 0) {
+					availablePoints.push(allPoints[i]);
+				}
+			}
+
+			function xxx(outcome41ThIndex) {
+				var outcome41Th = availablePoints[outcome41ThIndex];
+
+				
+			}
+
+			// формируем список исходящих
+			// пробегаем по всем остальным и запускаем "процедуру":
+			//     выбираем точку, ищем к ней крайнюю пару среди исходящих, выбираем на основе этой крайней пары множество вариантов для входящих, запускаем поиск
+			//     если количество больше= минимально необходимого - сохраняем
+		}
+
 		function initMap() {
 			var gmaps = window.google.maps;
 
