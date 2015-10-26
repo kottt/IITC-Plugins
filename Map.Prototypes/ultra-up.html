@@ -120,6 +120,51 @@
 
 		function getEdges(outcomePoints, outcome41Th) {
 			// бежим по всем, ищем такие, у которых знак для всех остальных будет одинаковым
+			var result = {
+				left: null,
+				right: null
+			};
+			for (var i = 0; i < outcomePoints.length; i++) {
+				var point = outcomePoints[i];
+				var edge = window.google.maps.geometry.spherical.computeHeading(outcome41Th, point);
+
+				var angleSign = null;
+				for (var j = 0; j < outcomePoints.length; j++) {
+					if (j === i) continue;
+
+					var currentSign = getAngleSign(edge, point, outcomePoints[j]);
+					if (angleSign == null) {
+						angleSign = currentSign;
+					}
+					else if (currentSign !== angleSign) {
+						angleSign = null;
+						break;
+					}
+				}
+				if (angleSign === null) continue;
+				if (angleSign < 0) {
+					result.left = edge;
+				} else {
+					result.right = edge;
+				}
+			}
+			return result;
+		}
+
+		function getAllOppositeVariants(outcomePoints, availablePoints, minIncomingCount) {
+
+			function xxx(outcome41ThIndex) {
+				var outcome41Th = availablePoints[outcome41ThIndex];
+
+				var edges = getEdges(outcomePoints, outcome41Th);
+
+				
+			}
+
+			// формируем список исходящих
+			// пробегаем по всем остальным и запускаем "процедуру":
+			//     выбираем точку, ищем к ней крайнюю пару среди исходящих, выбираем на основе этой крайней пары множество вариантов для входящих, запускаем поиск
+			//     если количество больше= минимально необходимого - сохраняем
 		}
 
 		function getVariants(allPoints, outcomeIndexes, minIncomingCount) {
@@ -130,17 +175,7 @@
 					availablePoints.push(allPoints[i]);
 				}
 			}
-
-			function xxx(outcome41ThIndex) {
-				var outcome41Th = availablePoints[outcome41ThIndex];
-
-				
-			}
-
-			// формируем список исходящих
-			// пробегаем по всем остальным и запускаем "процедуру":
-			//     выбираем точку, ищем к ней крайнюю пару среди исходящих, выбираем на основе этой крайней пары множество вариантов для входящих, запускаем поиск
-			//     если количество больше= минимально необходимого - сохраняем
+			return getAllOppositeVariants(outcome, availablePoints, minIncomingCount);
 		}
 
 		function initMap() {
