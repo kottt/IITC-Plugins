@@ -22,6 +22,17 @@
 	<script>
 		var mapCenter = { lat: 58.5283716, lng: 31.2762483 };
 
+		function getIcon(color) {
+			return {
+				path: gmaps.SymbolPath.CIRCLE,
+				fillColor: color,
+				fillOpacity: .4,
+				strokeColor: "white",
+				strokeWeight: .5,
+				scale: 10
+			}
+		}
+
 		function bronKerboschMaxByInclusion(m) {
 			var results = [];
 
@@ -121,50 +132,90 @@
 		function getEdges(outcomePoints, outcome41Th) {
 			// бежим по всем, ищем такие, у которых знак для всех остальных будет одинаковым
 			var result = {
-				left: null,
-				right: null
+				negative: null,
+				positive: null
 			};
 			for (var i = 0; i < outcomePoints.length; i++) {
 				var point = outcomePoints[i];
-				var edge = window.google.maps.geometry.spherical.computeHeading(outcome41Th, point);
+				var edge = window.google.maps.geometry.spherical.computeHeading(point, outcome41Th);
 
 				var angleSign = null;
 				for (var j = 0; j < outcomePoints.length; j++) {
 					if (j === i) continue;
 
-					var currentSign = getAngleSign(edge, point, outcomePoints[j]);
-					if (angleSign == null) {
+					var currentSign = getAngleSign(edge, outcomePoints[j], point);
+					if (angleSign === null) {
 						angleSign = currentSign;
-					}
-					else if (currentSign !== angleSign) {
+					} else if (currentSign !== angleSign) {
 						angleSign = null;
 						break;
 					}
 				}
-				if (angleSign === null) continue;
+
+				if (angleSign === null || angleSign === 0) continue;
 				if (angleSign < 0) {
-					result.left = edge;
+					result.negative = edge;
 				} else {
-					result.right = edge;
+					result.positive = edge;
 				}
 			}
-			return result;
+			return result.negative === null || result.positive === null ? null : result;
 		}
 
-		function getAllOppositeVariants(outcomePoints, availablePoints, minIncomingCount) {
+		function getAllVariants(outcomePoints, availablePoints, minIncomingCount) {
+			var variants = [];
 
-			function xxx(outcome41ThIndex) {
+			function addIncomeSet(incomePoints, outcome41Th) {
+				if (incomePoints.length >= minIncomingCount) {
+					var maxSequesnes = getMaxSequense(outcome41Th, outcomePoints, incomePoints);
+					if (maxSequesnes.length === 0) {
+						return;
+					}
+
+					maxSequesnes.sort(function(a, b) { return b.length - a.length; });
+					var maxLength = maxSequesnes[0].length;
+
+					maxSequesnes.forEach(function(sequense) {
+						if (sequense.length !== maxLength) return;
+						console.log("incomePoints length: " + sequense.length);
+						variants.push({
+							outcome41Th: outcome41Th,
+							incomePoints: sequense
+						});
+					});
+
+				}
+			}
+
+			for (var outcome41ThIndex = 0; outcome41ThIndex < availablePoints.length; outcome41ThIndex++) {
 				var outcome41Th = availablePoints[outcome41ThIndex];
 
 				var edges = getEdges(outcomePoints, outcome41Th);
+				if (edges === null || edges === undefined) continue;
 
-				
+				var leftPoints = [],
+					rightPoints = [];
+
+				for (var i = 0; i < availablePoints.length; i++) {
+					if (i === outcome41ThIndex) continue;
+
+					var point = availablePoints[i];
+					var negativeSign = getAngleSign(edges.negative, outcome41Th, point);
+					if (negativeSign > 0) {
+						leftPoints.push(point);
+					}
+
+					var positiveSign = getAngleSign(edges.positive, outcome41Th, point);
+					if (positiveSign < 0) {
+						rightPoints.push(point);
+					}
+				}
+
+				addIncomeSet(leftPoints, outcome41Th);
+				addIncomeSet(rightPoints, outcome41Th);
 			}
 
-			// формируем список исходящих
-			// пробегаем по всем остальным и запускаем "процедуру":
-			//     выбираем точку, ищем к ней крайнюю пару среди исходящих, выбираем на основе этой крайней пары множество вариантов для входящих, запускаем поиск
-			//     если количество больше= минимально необходимого - сохраняем
+			return variants;
 		}
 
 		function getVariants(allPoints, outcomeIndexes, minIncomingCount) {
@@ -175,11 +226,40 @@
 					availablePoints.push(allPoints[i]);
 				}
 			}
-			return getAllOppositeVariants(outcome, availablePoints, minIncomingCount);
+			return {
+				outcomePoints: outcome,
+				variants: getAllVariants(outcome, availablePoints, minIncomingCount)
+			};
+		}
+
+		var allMarkers = [];
+
+		function resetMap() {
+			allMarkers.forEach(function (marker) { marker.setMap(null); });
+			allMarkers = [];
+		}
+
+		function drawVariant(variant, outcome) {
+			resetMap();
+
+			function drawPoint(point, color) {
+				var marker = new gmaps.Marker({
+					position: point,
+					map: window.map,
+					icon: getIcon(color)
+				});
+
+				allMarkers.push(marker);
+			}
+
+			drawPoint(variant.outcome41Th, "black");
+			variant.incomePoints.forEach(function (index) { drawPoint(window.data.income[index], "red") });
+			outcome.forEach(function (point) { drawPoint(point, "blue") });
 		}
 
 		function initMap() {
 			var gmaps = window.google.maps;
+			window.gmaps = gmaps;
 
 			var map = new gmaps.Map(document.getElementById("map"), {
 				center: mapCenter,
@@ -188,17 +268,6 @@
 
 			function toLatLng(point) {
 				return new gmaps.LatLng(point.latlng.lat, point.latlng.lng);
-			}
-
-			function getIcon(color) {
-				return {
-					path: gmaps.SymbolPath.CIRCLE,
-					fillColor: color,
-					fillOpacity: .4,
-					strokeColor: "white",
-					strokeWeight: .5,
-					scale: 10
-				}
 			}
 
 			function drawPoint(point) {
@@ -232,32 +301,35 @@
 			var outcomePoints = pointsToObjects(window.outcomePoints, "blue");
 			var incomePoints = pointsToObjects(window.incomePoints, "yellow");
 
-
-			var outcome = outcomePoints.map(toLatLng);
-			var income = incomePoints.map(toLatLng);
-
-			var pairsGraph = [];
-
-			for (var i = 0; i < income.length; i++) {
-				var row = [];
-				for (var j = 0; j < income.length; j++) {
-					row.push(!isGoodPair(income[i], income[j], outcome));
-				}
-				pairsGraph.push(row);
-			}
-
-			window.chains = bronKerboschMaxByInclusion(pairsGraph);
-			console.log(window.chains);
-
-			var chain = window.chains[0];
-			for (var i = 0; i < chain.length; i++) {
-				var point = incomePoints[chain[i]];
-				point.color = "green";
+			window.map = map;
+			window.data = {
+				outcome: outcomePoints.map(toLatLng),
+				income: incomePoints.map(toLatLng)
 			}
 
 
-			outcomePoints.forEach(drawPoint);
-			incomePoints.forEach(drawPoint);
+			//var pairsGraph = [];
+
+			//for (var i = 0; i < income.length; i++) {
+			//	var row = [];
+			//	for (var j = 0; j < income.length; j++) {
+			//		row.push(!isGoodPair(income[i], income[j], outcome));
+			//	}
+			//	pairsGraph.push(row);
+			//}
+
+			//window.chains = bronKerboschMaxByInclusion(pairsGraph);
+			//console.log(window.chains);
+
+			//var chain = window.chains[0];
+			//for (var i = 0; i < chain.length; i++) {
+			//	var point = incomePoints[chain[i]];
+			//	point.color = "green";
+			//}
+
+
+			//outcomePoints.forEach(drawPoint);
+			//incomePoints.forEach(drawPoint);
 
 		}
 
