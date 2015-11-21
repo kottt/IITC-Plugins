@@ -93,9 +93,10 @@
 			return results;
 		}
 
+
 		function getAngleSign(ab, b, c) {
 			var bc = window.google.maps.geometry.spherical.computeHeading(b, c);
-			return (ab - bc) < 180 ? 1 : -1;
+			return Math.sign(Math.sin(Math.PI * ((ab - bc) / 180)));
 		}
 
 		function isGoodPair(a, b, outcomePoints, outcome41Th) {
@@ -125,7 +126,7 @@
 				}
 				pairsGraph.push(row);
 			}
-
+			console.log("graph OK");
 			return bronKerboschMaxByInclusion(pairsGraph);
 		}
 
@@ -165,18 +166,25 @@
 		function getAllVariants(outcomePoints, availablePoints, minIncomingCount) {
 			var variants = [];
 
-			function addIncomeSet(incomePoints, outcome41Th) {
+			function addIncomeSet(incomePoints, outcome41Th, message) {
 				if (incomePoints.length >= minIncomingCount) {
+					console.log(incomePoints.length, message);
+					return;
 					var maxSequesnes = getMaxSequense(outcome41Th, outcomePoints, incomePoints);
 					if (maxSequesnes.length === 0) {
 						return;
 					}
-
+					
 					maxSequesnes.sort(function(a, b) { return b.length - a.length; });
 					var maxLength = maxSequesnes[0].length;
+					console.log("maxLength sequense: ", maxLength, message);
+
+					if (maxLength < minIncomingCount) return;
 
 					maxSequesnes.forEach(function(sequense) {
 						if (sequense.length !== maxLength) return;
+
+
 						console.log("incomePoints length: " + sequense.length);
 						variants.push({
 							outcome41Th: outcome41Th,
@@ -211,8 +219,8 @@
 					}
 				}
 
-				addIncomeSet(leftPoints, outcome41Th);
-				addIncomeSet(rightPoints, outcome41Th);
+				addIncomeSet(leftPoints, outcome41Th, "left, index: " + outcome41ThIndex);
+				addIncomeSet(rightPoints, outcome41Th, "right, index: " + outcome41ThIndex);
 			}
 
 			return variants;
@@ -257,6 +265,15 @@
 			outcome.forEach(function (point) { drawPoint(point, "blue") });
 		}
 
+		function extend(obj1, obj2) {
+			for (var attrname in obj2) {
+				if (obj2.hasOwnProperty(attrname)) {
+					obj1[attrname] = obj2[attrname];
+				}
+			}
+			return obj1;
+		}
+
 		function initMap() {
 			var gmaps = window.google.maps;
 			window.gmaps = gmaps;
@@ -282,6 +299,7 @@
 				marker.addListener("click", function () {
 					marker.setIcon(getIcon(point.enabled ? "white" : point.color));
 					point.enabled = !point.enabled;
+					console.log(point.latlng, point.color);
 				});
 			}
 
@@ -331,6 +349,81 @@
 			//outcomePoints.forEach(drawPoint);
 			//incomePoints.forEach(drawPoint);
 
+
+			//var outcome = [
+			//	{ lat: 58.531449, lng: 31.269893 },
+			//	{ lat: 58.530416, lng: 31.270334 },
+			//	{ lat: 58.528792, lng: 31.272124 }];
+
+			//var outcome41Th = { lat: 58.518517, lng: 31.289089 };
+
+			//var income = [
+			//	{ lat: 58.521634, lng: 31.273893 },
+			//	{ lat: 58.521421, lng: 31.273452 },
+			//	{ lat: 58.52108, lng: 31.272758 }];
+
+			//function drawPoly(path, params) {
+			//	params = extend({
+			//		strokeColor: "#CC0099",
+			//		strokeOpacity: 1.0,
+			//		strokeWeight: 2,
+			//		geodesic: true,
+			//		path: path,
+			//		map: map
+			//	}, params || {});
+
+			//	return new gmaps.Polyline(params);
+			//}
+
+			//income.forEach(function(point) {
+			//	drawPoly([point, outcome41Th]);
+			//});
+
+			//var outcomeVariants = outcome.map(function (latlng) {
+			//	var marker = new gmaps.Marker({
+			//		    position: latlng,
+			//		    map: map,
+			//		    icon: getIcon("blue")
+			//	    }),
+			//	    isShown = false;
+
+			//	var lines = income.map(function (point) { return drawPoly([point, latlng], { color: "green", map: null }); });
+			//	lines.push(drawPoly([outcome41Th, latlng], { color: "green", map: null }));
+
+			//	function setLinesMap(map) {
+			//		isShown = !!map;
+			//		lines.forEach(function(line) { line.setMap(map); });
+			//	}
+
+			//	marker.addListener("click", function () {
+			//		if (isShown) {
+			//			setLinesMap(null);
+			//			return;
+			//		}
+			//		outcomeVariants.forEach(function (item) { item.toggleLines(null); });
+			//		setLinesMap(map);
+			//	});
+
+			//	return {
+			//		toggleLines: function(show) {
+			//			setLinesMap(show ? map : null);
+			//		}
+			//	};
+			//});
+
+			//function cast(point) { return toLatLng({ latlng: point }); }
+
+			//function drawPair(a, b) {
+			//	var poly = drawPoly([a, b], { strokeWeight: 3 });
+			//	poly.addListener("click", function () {
+			//		console.log(a, b);
+			//		console.log(isGoodPair(cast(a), cast(b), cast(outcome), cast(outcome41Th)));
+			//	});
+			//}
+
+			//for (var i = 1; i < income.length; i++) {
+			//	drawPair(income[i - 1], income[i]);
+			//}
 		}
 
 	</script>
