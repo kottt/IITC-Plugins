@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>UltraUp testing</title>
+	<meta charset="utf-8" />
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			height: 100%;
+		}
+		#left, #right, #fields {
+			position: absolute;
+			top: 10px;
+			display: inline-block;
+			background-color: white;
+			border-radius: 3px;
+			padding: 5px;
+			cursor: pointer;
+		}
+		#left {
+			right: 100px;
+		}
+		#right {
+			right: 50px;
+		}
+		#fields {
+			right: 200px;
+			color: white;
+			background-color: deepskyblue;
+			font-family: Calibri;
+			font-weight: bold;
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<div id="fields">fields</div>
+	<div id="left">left</div>
+	<div id="right">right</div>
+	<script src="all-novgorod-portals.js"></script>
+	<script src="code/algorithms.js"></script>
+	<script src="code/ultra-up.js"></script>
+	<script>
+		var mapCenter = { lat: 58.5283716, lng: 31.2762483 };
+
+		function initMap() {
+			var gmaps = window.google.maps;
+			window.gmaps = gmaps;
+
+			var map = new gmaps.Map(document.getElementById("map"), {
+				center: mapCenter,
+				zoom: 14
+			});
+
+			var ultraUp = new UltraUp(map, portals, deleted, outcomeIndexes, 303);
+			window.ultraUp = ultraUp;
+			ultraUp.drawAll("red");
+			ultraUp.drawByGlobalIndexes(globalLeftIndexes);
+			ultraUp.drawByGlobalIndexes(globalRightIndexes);
+
+
+			var indexes = globalLeftIndexes.slice();
+			indexes.push(303);
+			indexes = indexes.concat(globalRightIndexes.reverse());
+
+			var points = [];
+			indexes.forEach(function (index) { points.push(ultraUp.allPoints[index]); });
+
+
+			var currentIndex = 0;
+			var maxIndex = globalOutcomeIndexes.length - 1;
+			var outcomePoints = [];
+			globalOutcomeIndexes.forEach(function (index) { outcomePoints.push(ultraUp.allPoints[index]); });
+
+			document.getElementById("fields").onclick = function () {
+				console.log("Index: " + currentIndex);
+				ultraUp.drawFieldsVariant(points, outcomePoints[currentIndex++]);
+
+				if (currentIndex > maxIndex) {
+					currentIndex = 0;
+				}
+			};
+		}
+
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&callback=initMap"></script>
+</body>
+</html>

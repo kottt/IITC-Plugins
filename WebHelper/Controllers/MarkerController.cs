@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace WebHelper.Controllers {
 	public class MarkerController : Controller {
-		private const int MarkerSize = 16;
+		private const int MarkerSize = 20;
 
 		private static readonly Regex RgbColorRegex = new Regex(@"(\d{1,3}),(\d{1,3}),(\d{1,3})");
 		private static readonly Func<Group, byte> Parse = group => (byte)int.Parse(group.Value);
