@@ -110,6 +110,28 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.Prototypes", "Map.Proto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHelper", "WebHelper\WebHelper.csproj", "{D6F3B5C4-18CE-4C2C-8171-425F344BDBB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CropImages", "CropImages\CropImages.csproj", "{548B9365-1B56-4C73-9C7E-17C11BF674F9}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.CountPortalsInPolygons", "IITC.CountPortalsInPolygons\", "{2E021A35-70FA-4D9B-9F82-022C29CB0211}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_38705"
+		Debug.AspNetCompiler.PhysicalPath = "IITC.CountPortalsInPolygons\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_38705\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_38705"
+		Release.AspNetCompiler.PhysicalPath = "IITC.CountPortalsInPolygons\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_38705\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "38705"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +162,14 @@ Global
 		{D6F3B5C4-18CE-4C2C-8171-425F344BDBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F3B5C4-18CE-4C2C-8171-425F344BDBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F3B5C4-18CE-4C2C-8171-425F344BDBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548B9365-1B56-4C73-9C7E-17C11BF674F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548B9365-1B56-4C73-9C7E-17C11BF674F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548B9365-1B56-4C73-9C7E-17C11BF674F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548B9365-1B56-4C73-9C7E-17C11BF674F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
