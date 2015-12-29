@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.OptimalFields", "IITC.OptimalFields\", "{BB482997-0D2D-4AB3-8B5D-598C613A0E5D}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -132,6 +132,26 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.CountPortalsInPolygons
 		VWDPort = "38705"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IITC.StaticCrossChecker", "IITC.StaticCrossChecker\", "{E6DDBE55-15B4-4B26-8EE4-B43D872A7921}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_31939"
+		Debug.AspNetCompiler.PhysicalPath = "IITC.StaticCrossChecker\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_31939\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_31939"
+		Release.AspNetCompiler.PhysicalPath = "IITC.StaticCrossChecker\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_31939\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "31939"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -170,6 +190,10 @@ Global
 		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E021A35-70FA-4D9B-9F82-022C29CB0211}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E6DDBE55-15B4-4B26-8EE4-B43D872A7921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6DDBE55-15B4-4B26-8EE4-B43D872A7921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6DDBE55-15B4-4B26-8EE4-B43D872A7921}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6DDBE55-15B4-4B26-8EE4-B43D872A7921}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
