@@ -33,7 +33,7 @@
 
 		this.oppositePoint = this.allPoints[oppositeIndex];
 		this.oppositePoint.type = TYPE.Opposite;
-		this.oppositePoint.color = "255,0,220";
+		this.oppositePoint.color = "Fuchsia";
 
 		this.availablePoints = this.allPoints.filter(function (point) { return point.type === TYPE.Regular; });
 
@@ -82,10 +82,10 @@
 		return {
 			path: google.maps.SymbolPath.CIRCLE,
 			fillColor: color,
-			fillOpacity: .4,
+			fillOpacity: .8,
 			strokeColor: color,
 			strokeWeight: .5,
-			scale: 10
+			scale: 4
 		}
 	}
 
@@ -202,13 +202,17 @@
 			point.marker = marker;
 			point.selected = false;
 
-			marker.addListener("click", function () {
-				point.selected = !point.selected;
-				var icon = getIcon(point.selected ? "white" : point.color);
-				marker.setIcon(icon);
+			point.setIcon = function (color) {
+				point.marker.setIcon(getIcon(color));
+			}
 
-				console.log(point.index);
-			});
+			//marker.addListener("click", function () {
+			//	point.selected = !point.selected;
+			//	var icon = getIcon(point.selected ? "white" : point.color);
+			//	marker.setIcon(icon);
+
+			//	console.log(point.index);
+			//});
 		},
 		drawAll: function (color) {
 			this.allPoints.forEach(function (point) {
@@ -249,14 +253,14 @@
 			this.leftPoints.forEach(function (point) {
 				point.type = TYPE.IncomeLeft;
 				point.color = "0,255,85";
-				point.marker.setIcon(getIcon(point.color));
+				point.setIcon(point.color);
 
 				setClickListener(point, this.leftPoints, TYPE.IncomeLeft);
 			}, this);
 			this.rightPoints.forEach(function (point) {
 				point.type = TYPE.IncomeRight;
 				point.color = "236,255,35";
-				point.marker.setIcon(getIcon(point.color));
+				point.setIcon(point.color);
 
 				setClickListener(point, this.rightPoints, TYPE.IncomeRight);
 			}, this);
@@ -336,7 +340,7 @@
 			for (var i = 0; i < points.length; i++) {
 				var point = points[i];
 				point.movements = getUniquesCountInColumn(i);
-				point.marker.setIcon(getIcon(getColor(point.movements)));
+				point.setIcon(getColor(point.movements));
 			}
 		},
 
@@ -372,7 +376,7 @@
 				fillOpacity: .4,
 				strokeColor: color,
 				strokeOpacity: 1.0,
-				strokeWeight: 2,
+				strokeWeight: 1,
 				geodesic: true,
 				path: path,
 				map: this.map,
@@ -383,16 +387,16 @@
 
 		drawVariant: function (incomePoints, indexes) {
 			incomePoints.forEach(function (point) {
-				point.marker.setIcon(getIcon(point.color));
+				point.setIcon(point.color);
 			});
 			indexes.forEach(function (index) {
 				var point = incomePoints[index];
-				point.marker.setIcon(getIcon("black"));
+				point.setIcon("black");
 			});
 
 			for (var i = 0; i < indexes.length - 1; i++) {
 				var path = [incomePoints[indexes[i]], incomePoints[indexes[i + 1]], this.oppositePoint].map(toLatLng);
-				this.drawPoly(path, "blue");
+				this.drawPoly(path, "DeepSkyBlue");
 			}
 		},
 
@@ -402,31 +406,45 @@
 				var point = this.allPoints[index];
 				this.drawPoint(point);
 
-				point.marker.setIcon(getIcon("black"));
+				point.setIcon("DodgerBlue");
 				points.push(point);
 			}, this);
 
 			for (var i = 0; i < points.length - 1; i++) {
 				var path = [points[i], points[i + 1], this.oppositePoint].map(toLatLng);
-				this.drawPoly(path, "blue");
+				this.drawPoly(path, "DeepSkyBlue", { strokeColor: "black" });
 			}
 		},
 
 		fields: [],
 
 		drawFieldsVariant: function (points, outcomePoint) {
-			this.outcomePoints.forEach(function (point) {
-				point.marker.setIcon(getIcon("red"));
-			});
-			this.fields.forEach(function (poly) { poly.setMap(null) });
-			this.fields = [];
+			this.drawOutcomePoints("red");
+			this.resetFields(points);
 
-			outcomePoint.marker.setIcon(getIcon("Fuchsia"));
+			outcomePoint.setIcon("Fuchsia");
 
 			for (var i = 0; i < points.length - 1; i++) {
 				var path = [points[i], points[i + 1], outcomePoint].map(toLatLng);
 				this.fields.push(this.drawPoly(path, "DeepSkyBlue"));
 			}
+		},
+
+		drawOutcomePoints: function (color) {
+			this.outcomePoints.forEach(function (point) {
+				point.marker.setIcon(getIcon(color));
+			});
+		},
+
+		resetFields: function () {
+			
+			this.fields.forEach(function (poly) { poly.setMap(null) });
+			this.fields = [];
+		},
+
+		drawFieldsVariant2: function (point, outcomePoint) {
+			var path = [point, this.oppositePoint, outcomePoint].map(toLatLng);
+			this.fields.push(this.drawPoly(path, "DeepSkyBlue", { strokeColor: "black"}));
 		}
 	};
 

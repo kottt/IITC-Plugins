@@ -65,8 +65,8 @@
 			ultraUp.drawByGlobalIndexes(globalRightIndexes);
 
 
-			var indexes = globalLeftIndexes.slice();
-			indexes.push(303);
+			var indexes = globalLeftIndexes.slice().reverse();
+			//indexes.push(303);
 			indexes = indexes.concat(globalRightIndexes.reverse());
 
 			var points = [];
@@ -74,18 +74,37 @@
 
 
 			var currentIndex = 0;
-			var maxIndex = globalOutcomeIndexes.length - 1;
+			var maxIndex = indexes.length - 1;
 			var outcomePoints = [];
 			globalOutcomeIndexes.forEach(function (index) { outcomePoints.push(ultraUp.allPoints[index]); });
 
+			ultraUp.drawOutcomePoints("red");
+			ultraUp.resetFields(points);
 			document.getElementById("fields").onclick = function () {
-				console.log("Index: " + currentIndex);
-				ultraUp.drawFieldsVariant(points, outcomePoints[currentIndex++]);
-
-				if (currentIndex > maxIndex) {
-					currentIndex = 0;
-				}
+				drawLinking(0);
 			};
+
+			
+			function drawLinking(outcomeIndex) {
+				ultraUp.resetFields(points);
+				if (outcomeIndex >= outcomePoints.length) return;
+				var outcome = outcomePoints[outcomeIndex];
+
+				var index = 0;
+				outcome.setIcon("Fuchsia");
+				var timerId = setInterval(function () {
+					ultraUp.drawFieldsVariant2(points[index++], outcome);
+
+					if (index >= indexes.length) {
+						clearInterval(timerId);
+						outcome.setIcon("gray");
+
+						setTimeout(function () {
+							drawLinking(outcomeIndex + 1);
+						}, 200);
+					}
+				}, 90);
+			}
 		}
 
 	</script>
